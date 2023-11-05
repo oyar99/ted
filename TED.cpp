@@ -70,13 +70,10 @@ int main(int argc, char *argv[]) {
      *      to the pre-order traversal of T such that when we visit node u, we append 
      *      label(u) followed by a matching parenthesis that encloses the subtree rooted at u.
      * 
-     *      The first line of the input is a string of size 3n where n corresponds to the number 
-     *      of nodes in T1. This string is the pre-order traversal of T1 as explained above.
+     *      The first line of the input is the pre-order traversal of T1 as explained above.
      * 
-     *      The second line of the input is a string of size 3m where m corresponds to the number
-     *      of nodes in T2. This string is the pre-order traversal of T2 as explained above.
+     *      The second line of the input is the pre-order traversal of T2 as explained above.
      * 
-     *      n and m are both at least 1.
      *      
      *      For instance:
      * 

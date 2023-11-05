@@ -22,43 +22,12 @@ g++ -o ted.exe -I ./src/models -I ./src/procedures *.cpp src/models/*.cpp src/pr
 The program receives two trees $T$ and $T'$ and returns a number $d$ that indicates the number of elementary
 operations required to transform $T$ into $T'$.
 
-The input contains two trees T1 and T2 represented as strings that correspond
-to the pre-order traversal of T such that when we visit node u, we append
-label(u) followed by a matching parenthesis that encloses the subtree rooted at u.
+Given a rooted tree $T$, we can represent the pre-order traversal of $T$ in such a way that when we visit node $u$, we append
+$label(u)$ followed by a matching parenthesis that encloses the subtree rooted at $u$. This representation is unique for all possible
+trees.
 
-The first line of the input is a string of size 3n where n corresponds to the number 
-of nodes in T1. This string is the pre-order traversal of T1 as explained above.
-
-The second line of the input is a string of size 3m where m corresponds to the number
-of nodes in T2. This string is the pre-order traversal of T2 as explained above.
-
-n and m are both at least 1.
-
-For instance:
-
-$\begin{tikzpicture}[
-        baseline=(current bounding box.center),
-        level distance=1.2cm,
-        level 1/.style={sibling distance=1.5cm},
-        level 2/.style={sibling distance=1.5cm}]
-
-        \node[circle,draw] 
-        {1} 
-            child {node[circle,draw] 
-                {\phantom{2}} child {node[circle,draw] 
-                    {\phantom{3}}
-                }
-            }
-            child {node[circle,draw] 
-                {4}
-            }
-            child {node[circle, draw]
-                {5}
-            };
-\end{tikzpicture}$
-
-Note each integer represents a labeled node. As such, there might be duplicated integers
-in the string representation of the tree that actually correspond to different nodes.
+The first line of the input is a string of the pre-order traversal of $T$ as explained above.
+The second line of the input is a string of the pre-order traversal of $T'$ as explained above.
 
 The program requires the following parameters in the specified order
 
