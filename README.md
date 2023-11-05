@@ -44,7 +44,7 @@ The third option is an algorithm devised by Santiago Ramirez and Jhon Rayo inspi
 ted.exe < data/sample_5_8.in > output/sample_5_8.out TED
 ```
 
-- The approximation factor $\eps$ for the approximation scheme. Should be a positive integer value and is only required if the algorithm specified is `Approx`.
+- The approximation factor $\varepsilon$ for the approximation scheme. Should be a positive integer value and is only required if the algorithm specified is `Approx`.
 
 
 ```sh
