@@ -26,7 +26,7 @@ operations required to transform $T$ into $T'$. The program requires the followi
 
 The first option `ZhangShasha` is an implementation of the algorithm described by ZhangShasha in 1989 in the paper
 [Simple Fast Algorithms for the Editing Distance between Trees and Related Problems](https://www.proquest.com/docview/919771926) which
-runs in $O(n^4) time.
+runs in $O(n^4)$ time.
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out ZhangShasha
