@@ -1,6 +1,6 @@
 # Tree Edit Distance
 
-Given two node-labeled rooted trees $T$ and $T'$ each of size at most n, what is
+Given two node-labeled rooted trees $T$ and $T'$ each of size at most $n$, what is
 the minimum number of elementary operations needed to transform $T$ into $T'$?.
 
 This program implements different solutions for the above problem in C++.
