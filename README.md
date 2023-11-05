@@ -41,7 +41,7 @@ runs in $O(n^4)$ time.
 ted.exe < data/sample_5_8.in > output/sample_5_8.out ZhangShasha
 ```
 
-The second option is an approximation algorithm described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388).
+The second option is an approximation algorithm described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388). The implementation uses $\varepsilon = 1$ and so the algorithm returns an answer that is at most twice the optimal.
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx
@@ -51,11 +51,4 @@ The third option is an algorithm devised by Santiago Ramirez and Jhon Rayo inspi
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out TED
-```
-
-- The approximation factor $\varepsilon$ for the approximation scheme. Should be a positive integer value and is only required if the algorithm specified is `Approx`.
-
-
-```sh
-ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx 2
 ```

@@ -2,6 +2,7 @@
 #define SAEEDSCHEME_H
 
 #include <tree.h>
+#include <unordered_map>
 
 namespace SaeedScheme {
     /**
@@ -19,12 +20,15 @@ namespace SaeedScheme {
         int jl;
         int jr;
 
+        // collection of feddsk data structures
+        std::unordered_map<int, FEDDSK> feds;
+
         // Approximation factor E
         int E;
         /**
          * Constructs FEDDS given two subforests F and F' in time O(n^2)
         */
-        FEDDS(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, int E);
+        FEDDS(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr);
 
         /**
          * Answer queries of the form:
@@ -56,7 +60,7 @@ namespace SaeedScheme {
         /**
          * Constructs FEDDSK given two subforests F and F' in time O(n^2)
         */
-        FEDDSK(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, int k, int E);
+        FEDDSK(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, int k, double E);
 
         /**
          * Answers queries of the form:
@@ -76,12 +80,11 @@ namespace SaeedScheme {
 
      * @param t1 An ordered labeled rooted tree
      * @param t2 An ordered labeled rooted tree
-     * @param e The approximation factor. Should be greater than zero
      * 
      * @returns An integer that represents an approximation for the number of operations needed to transform t1 into t2.
      * Each operation has unit cost.
     */
-    int ted(const Tree& t1, const Tree& t2, int e);
+    int ted(const Tree& t1, const Tree& t2);
 
     /**
      * Computes the Spine Edit Distance (SED) between a spine S1 from T1 and a spine S2 from T2.

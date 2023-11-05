@@ -1,4 +1,5 @@
 #include <saeedScheme.h>
+#include <cmath>
 
 SaeedScheme::FEDDS::FEDDS(
     const Tree& t1,
@@ -6,10 +7,15 @@ SaeedScheme::FEDDS::FEDDS(
     int ir,
     const Tree& t2,
     int jl,
-    int jr,
-    int E
-) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr), E(E) {
+    int jr
+) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr) {
+    double er = .25f;
 
+    int n = t1.n + t2.n;
+
+    for (int k = 1; k <= n; k *= 2) {
+        feds[k] = FEDDSK(t1, il, ir, t2, jl, jr, k, er);
+    }
 }
 
 int SaeedScheme::FEDDS::query(
@@ -18,7 +24,17 @@ int SaeedScheme::FEDDS::query(
     int jl,
     int jr
 ) {
-    return 0;
+    int n = t1.n + t2.n;
+
+    for (int k = 1; k <= n; k *= 2) {
+        int d = feds[k].query(il, ir, jl, jr);
+
+        if (d >= 0) {
+            return d;
+        }
+    }
+
+    return -1;
 }
 
 SaeedScheme::FEDDSK::FEDDSK(
@@ -29,9 +45,16 @@ SaeedScheme::FEDDSK::FEDDSK(
     int jl,
     int jr,
     int k,
-    int E
+    double E
 ) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr), k(k), E(E) {
+    int n = t1.n;
+    int m = t2.n;
 
+    for (int i = 1; i <= n; i += (i + std::floor(k * E))) {
+        for (int j = 1; j <= m; j += (j + std::floor(k * E))) {
+            
+        }
+    }
 }
 
 int SaeedScheme::FEDDSK::query(
@@ -43,7 +66,7 @@ int SaeedScheme::FEDDSK::query(
     return 0;
 }
 
-int SaeedScheme::ted(const Tree& t1, const Tree& t2, int e) {
+int SaeedScheme::ted(const Tree& t1, const Tree& t2) {
     int n = t1.n;
     int m = t2.n;
 

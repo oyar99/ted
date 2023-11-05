@@ -7,8 +7,8 @@ int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
     return ZhangShasha::ted(t1, t2);
 }
 
-int compute_SaeedScheme(const Tree& t1, const Tree& t2, int e) {
-    return SaeedScheme::ted(t1, t2, e);
+int compute_SaeedScheme(const Tree& t1, const Tree& t2) {
+    return SaeedScheme::ted(t1, t2);
 }
 
 std::pair<std::string, std::string> get_input_trees() {
@@ -103,12 +103,6 @@ int main(int argc, char *argv[]) {
     if (algorithm == "ZhangShasha") {
         d = compute_ZhangShasha(t1, t2);
     } else if (algorithm == "Approx") {
-        int e = 1;
-        if (argc >= 2) {
-            std::string approx_factor(argv[2]);
-            e = std::stoi(approx_factor);
-        }
-
         d = compute_SaeedScheme(t1, t2, e);
     } else if (algorithm == "TED") {
         // no-op
