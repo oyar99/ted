@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     if (algorithm == "ZhangShasha") {
         d = compute_ZhangShasha(t1, t2);
     } else if (algorithm == "Approx") {
-        d = compute_SaeedScheme(t1, t2, e);
+        d = compute_SaeedScheme(t1, t2);
     } else if (algorithm == "TED") {
         // no-op
     }
