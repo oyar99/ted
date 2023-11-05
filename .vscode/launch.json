@@ -3,7 +3,9 @@
     "type": "cppdbg",
     "request": "launch",
     "program": "${workspaceFolder}\\ted.exe",
-    "args": [],
+    "args": [
+      "ZhangShasha"
+    ],
     "stopAtEntry": false,
     "cwd": "${workspaceFolder}",
     "environment": [],
@@ -17,7 +19,7 @@
         "ignoreFailures": true
       }
     ],
-    "preLaunchTask": "C/C++: g++.exe build TED",
+    "preLaunchTask": "C++: g++.exe build TED",
     "configurations": [
     {
       "name": "(gdb) Attach",

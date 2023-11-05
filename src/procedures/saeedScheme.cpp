@@ -1,5 +1,48 @@
 #include <saeedScheme.h>
 
+SaeedScheme::FEDDS::FEDDS(
+    const Tree& t1,
+    int il,
+    int ir,
+    const Tree& t2,
+    int jl,
+    int jr,
+    int E
+) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr), E(E) {
+
+}
+
+int SaeedScheme::FEDDS::query(
+    int il,
+    int ir,
+    int jl,
+    int jr
+) {
+    return 0;
+}
+
+SaeedScheme::FEDDSK::FEDDSK(
+    const Tree& t1,
+    int il,
+    int ir,
+    const Tree& t2,
+    int jl,
+    int jr,
+    int k,
+    int E
+) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr), k(k), E(E) {
+
+}
+
+int SaeedScheme::FEDDSK::query(
+    int il,
+    int ir,
+    int jl,
+    int jr
+) {
+    return 0;
+}
+
 int SaeedScheme::ted(const Tree& t1, const Tree& t2, int e) {
     int n = t1.n;
     int m = t2.n;
