@@ -70,13 +70,15 @@
         "xutility": "cpp",
         "functional": "cpp",
         "set": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "map": "cpp"
     },
     "cSpell.language": "en,es-ES",
     "cSpell.words": [
         "FEDDS",
         "feddsk",
         "FEDDSK",
+        "fedij",
         "Jhon",
         "keyroots",
         "Saaed",

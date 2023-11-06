@@ -77,7 +77,7 @@ int ZhangShasha::ted(const Tree& t1, const Tree& t2) {
     return td[1][1];
 }
 
-int ZhangShasha::fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& td, int a, int b) {
+std::vector<std::vector<int>> ZhangShasha::fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& td, int k, int l) {
     int n = t1.n;
     int m = t2.n;
 
@@ -92,26 +92,27 @@ int ZhangShasha::fed(const Tree& t1, const Tree& t2, const std::vector<std::vect
     //      fd[i][j+1] + 1,
     //      fd[rightmost(i) + 1][rightmost(j) + 1] + td[i][j]             
     // );
-    std::vector<std::vector<int>> fd(n + 2, std::vector<int>(m + 2));
-
     std::vector<int> t1_rightmost = t1.rightmost();
     std::vector<int> t2_rightmost = t2.rightmost();
+
+    std::vector<std::vector<int>> fd(n + 2, std::vector<int>(m + 2, -1));
+    fd[t1_rightmost[k] + 1][t2_rightmost[l] + 1] = 0;
 
     auto cost = [&](int i, int j) {
         return t1.labels[i] == t2.labels[j] ? 0 : 1;
     };
 
-    for (int i = n; i >= 1; --i) {
+    for (int i = t1_rightmost[k]; i >= k; --i) {
         // deletions
-        fd[i][m+1] = fd[i+1][m+1] + 1;
+        fd[i][t2_rightmost[l] + 1] = fd[i+1][t2_rightmost[l] + 1] + 1;
     }
-    for (int j = m; j >= 1; --j) {
+    for (int j = t2_rightmost[l]; j >= l; --j) {
         // insertions
-        fd[n+1][j] = fd[n+1][j+1] + 1;
+        fd[t1_rightmost[k] + 1][j] = fd[t1_rightmost[k] + 1][j+1] + 1;
     }
-    for (int i = n; i >= 1; --i) {
-        for (int j = m; j >= 1; --j) {
-            if (t1_rightmost[i] == t1_rightmost[1] && t2_rightmost[j] == t2_rightmost[1]) {
+    for (int i = t1_rightmost[k]; i >= k; --i) {
+        for (int j = t2_rightmost[l]; j >= l; --j) {
+            if (t1_rightmost[i] == t1_rightmost[k] && t2_rightmost[j] == t2_rightmost[l]) {
                 fd[i][j] = td[i][j];
             } else {
                 fd[i][j] = min(
@@ -123,7 +124,7 @@ int ZhangShasha::fed(const Tree& t1, const Tree& t2, const std::vector<std::vect
         }
     }
 
-    return 0;
+    return fd;
 }
 
 int min(int a, int b, int c) {

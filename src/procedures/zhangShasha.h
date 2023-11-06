@@ -32,10 +32,8 @@ namespace ZhangShasha {
      * @param i The index of the node for partitioning T1 into F1
      * @param j The index of the node for partitioning T2 into F2
      * 
-     * @returns An integer that represents the number of operations needed to transform forest
-     * T1(i, n) into T2(j, n).
     */
-    int fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& ted, int i, int j);
+    std::vector<std::vector<int>> fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& ted, int i, int j);
 }
 
 #endif
