@@ -130,7 +130,7 @@ std::vector<std::vector<int>> ZhangShasha::fed(const Tree& t1, int il, int ir, c
             fd[i][j] = min(
                 fd[i+1][j] + 1, // insert
                 fd[i][j+1] + 1, // delete
-                fd[t1_rightmost[i] + 1][t2_rightmost[j]+1] + td[i][j] // relabel
+                fd[t1_rightmost[i]+1][t2_rightmost[j]+1] + td[i][j] // relabel
             );
         }
     }

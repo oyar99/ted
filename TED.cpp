@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
     Tree t1(input_trees.first);
     Tree t2(input_trees.second);
 
-    std::string algorithm(argc <= 1 ? "Approx" : argv[1]);
+    std::string algorithm(argc <= 1 ? "ZhangShasha" : argv[1]);
 
     int d = -1;
 
