@@ -41,13 +41,15 @@ namespace ZhangShasha {
      * It requires O(n^2) time.
      * 
      * @param t1 An ordered labeled rooted tree
+     * @param il The index of the left node for partitioning T1 into F1
+     * @param ir The index of the right node for partitioning T1 into F1
      * @param t2 An ordered labeled rooted tree
+     * @param jl The index of the left node for partitioning T2 into F2
+     * @param jr The index of the right node for partitioning T2 into F2
      * @param ted The tree edit distances between nodes of T1 and T2
-     * @param i The index of the node for partitioning T1 into F1
-     * @param j The index of the node for partitioning T2 into F2
      * 
     */
-    std::vector<std::vector<int>> fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& ted, int i, int j);
+    std::vector<std::vector<int>> fed(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, const std::vector<std::vector<int>>& td);
 }
 
 #endif

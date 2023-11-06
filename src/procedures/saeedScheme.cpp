@@ -11,7 +11,7 @@ SaeedScheme::FEDDS::FEDDS(
     int jr,
     const std::vector<std::vector<int>>& td
 ) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr) {
-    int n = t1.n + t2.n;
+    int n = (ir-il+1)+(jr-jl+1);
 
     for (int k = 1; k <= n; k *= 2) {
         feds.insert({ k, FEDDSK(t1, il, ir, t2, jl, jr, k, td)});
@@ -24,7 +24,7 @@ int SaeedScheme::FEDDS::query(
     int jl,
     int jr
 ) {
-    int n = t1.n + t2.n;
+    int n = (ir-il+1)+(jr-jl+1);
 
     for (int k = 1; k <= n; k *= 2) {
         int d = feds.at(k).query(il, ir, jl, jr);
@@ -47,16 +47,13 @@ SaeedScheme::FEDDSK::FEDDSK(
     int k,
     const std::vector<std::vector<int>>& td
 ) : t1(t1), il(il), ir(ir), t2(t2), jl(jl), jr(jr), k(k) {
-    int n = t1.n;
-    int m = t2.n;
-
     if (k < 4) {
         return;
     }
 
-    for (int i = 1; i <= n; i += (k/4)) {
-        for (int j = 1; j <= m; j += (k/4)) {
-            std::vector<std::vector<int>> fedij = ZhangShasha::fed(t1, t2, td, i, j);
+    for (int i = 1; i <= ir-il+1; i += (k/4)) {
+        for (int j = 1; j <= jr-jl+1; j += (k/4)) {
+            std::vector<std::vector<int>> fedij = ZhangShasha::fed(t1, il+i-1, ir, t2, jl+j-1, jr, td);
             feds.insert({ std::to_string(i) + std::to_string(j), fedij});
         }
     }
@@ -76,7 +73,7 @@ int SaeedScheme::FEDDSK::query(
     std::string key = std::to_string(i) + std::to_string(j); 
 
     if (feds.count(key) > 0) {
-        int d = feds[key][ir][jr];
+        int d = feds.at(key)[ir][jr];
 
         if (d >= 0) {
             return d;
@@ -112,8 +109,5 @@ int SaeedScheme::sed(
     const std::vector<int>& s2, 
     const std::vector<std::vector<int>>& td
 ) {
-    auto a = ZhangShasha::ted_complete(t1, t2);
-    auto b = FEDDS(t1, 3, 5, t2, 1, 5, a);
-
-    return 1;
+    return 0;
 }
