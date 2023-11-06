@@ -57,10 +57,6 @@ int main(int argc, char *argv[]) {
      * 
      *          Time complexity: O(n^4)
      * 
-     *      "TED"
-     * 
-     *          // TODO: Our version of TED
-     * 
      * -E indicates the approximation factor to use for the approximation scheme. It should be a value
      * greater than zero.
      * 
@@ -96,7 +92,7 @@ int main(int argc, char *argv[]) {
     Tree t1(input_trees.first);
     Tree t2(input_trees.second);
 
-    std::string algorithm(argc <= 1 ? "ZhangShasha" : argv[1]);
+    std::string algorithm(argc <= 1 ? "Approx" : argv[1]);
 
     int d = -1;
 
@@ -104,8 +100,6 @@ int main(int argc, char *argv[]) {
         d = compute_ZhangShasha(t1, t2);
     } else if (algorithm == "Approx") {
         d = compute_SaeedScheme(t1, t2);
-    } else if (algorithm == "TED") {
-        // no-op
     }
 
     std::cout << d << std::endl;

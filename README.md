@@ -31,7 +31,7 @@ The second line of the input is a string of the pre-order traversal of $T'$ as e
 
 The program requires the following parameters in the specified order
 
-- The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha`, `Approx` or `TED`.
+- The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha` or `Approx`.
 
 The first option `ZhangShasha` is an implementation of the algorithm described by ZhangShasha in 1989 in the paper
 [Simple Fast Algorithms for the Editing Distance between Trees and Related Problems](https://www.proquest.com/docview/919771926) which
@@ -45,10 +45,4 @@ The second option is an approximation algorithm described in the paper [1+ε app
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx
-```
-
-The third option is an algorithm devised by Santiago Ramirez and Jhon Rayo inspired in some of the ideas of previos work in the area.
-
-```sh
-ted.exe < data/sample_5_8.in > output/sample_5_8.out TED
 ```

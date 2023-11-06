@@ -20,6 +20,20 @@ namespace ZhangShasha {
     int ted(const Tree& t1, const Tree& t2);
 
     /**
+     * Computes the Tree Edit Distance (TED) between T1 and T2 using the dynamic 
+     * programming algorithm described by ZhangShasha in 1989 in the paper 
+     * Simple Fast Algorithms for the Editing Distance between Trees and Related Problems. 
+     * 
+     * It requires O(n^4) time.
+     * 
+     * @param t1 An ordered labeled rooted tree
+     * @param t2 An ordered labeled rooted tree
+     * 
+     * @returns A matrix where each tree edit distance between subtrees of T1 and T2 can be found.
+    */
+    std::vector<std::vector<int>> ted_complete(const Tree& t1, const Tree& t2);
+
+    /**
      * Computes the Forest Edit Distance (FED) between F1 and F2 using the dynamic
      * programming algorithm described by ZhangShasha in 1989 in the paper
      * Simple Fast Algorithms for the Editing Distance between Trees and Related Problems.

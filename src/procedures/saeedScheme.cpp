@@ -68,8 +68,10 @@ int SaeedScheme::FEDDSK::query(
     int jl,
     int jr
 ) {
-    int i;
-    int j; 
+    // Find the index of the largest marked point in F less than or equal to il
+    int i = ((4 * il)/ k) * k/4;
+    // Find the index of the largest marked point in F' less than or equal to jl
+    int j = ((4 * jl)/ k) * k/4;
 
     std::string key = std::to_string(i) + std::to_string(j); 
 
@@ -110,5 +112,8 @@ int SaeedScheme::sed(
     const std::vector<int>& s2, 
     const std::vector<std::vector<int>>& td
 ) {
-    return 0;
+    auto a = ZhangShasha::ted_complete(t1, t2);
+    auto b = FEDDS(t1, 3, 5, t2, 1, 5, a);
+
+    return 1;
 }

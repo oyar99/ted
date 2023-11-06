@@ -4,6 +4,12 @@
 int min(int a, int b, int c);
 
 int ZhangShasha::ted(const Tree& t1, const Tree& t2) {
+    std::vector<std::vector<int>> ted = ZhangShasha::ted_complete(t1, t2);
+
+    return ted[1][1];
+}
+
+std::vector<std::vector<int>> ZhangShasha::ted_complete(const Tree& t1, const Tree& t2) {
     int n = t1.n;
     int m = t2.n;
 
@@ -74,7 +80,7 @@ int ZhangShasha::ted(const Tree& t1, const Tree& t2) {
         }
     }
 
-    return td[1][1];
+    return td;
 }
 
 std::vector<std::vector<int>> ZhangShasha::fed(const Tree& t1, const Tree& t2, const std::vector<std::vector<int>>& td, int k, int l) {
