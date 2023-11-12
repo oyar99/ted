@@ -81,3 +81,19 @@ int ApproxScheme::FEDDSK::query(
 
     return -1;
 }
+
+int ApproxScheme::ted(const Tree& t1_or, const Tree& t2_or) {
+    return 0;
+}
+
+void ApproxScheme::sed(
+    const Tree& t1, 
+    const Tree& t2, 
+    const std::vector<int>& s1, 
+    const std::vector<int>& s2,
+    const std::vector<int>& rl1,
+    const std::vector<int>& rl2,
+    const std::vector<int>& d2,
+    std::vector<std::vector<int>>& td
+) {
+}

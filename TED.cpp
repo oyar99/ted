@@ -1,6 +1,7 @@
 #include <tree.h>
 #include <ZhangShasha.h>
 #include <saeedScheme.h>
+#include <approxScheme.h>
 #include <iostream>
 
 int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
@@ -9,6 +10,10 @@ int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
 
 int compute_SaeedScheme(const Tree& t1, const Tree& t2) {
     return SaeedScheme::ted(t1, t2);
+}
+
+int compute_ApproxScheme(const Tree& t1, const Tree&t2) {
+    return ApproxScheme::ted(t1, t2);
 }
 
 std::pair<std::string, std::string> get_input_trees() {
@@ -102,6 +107,8 @@ int main(int argc, char *argv[]) {
         d = compute_ZhangShasha(t1, t2);
     } else if (algorithm == "Saeed") {
         d = compute_SaeedScheme(t1, t2);
+    } else if (algorithm == "Approx") {
+        d = compute_ApproxScheme(t1, t2);
     }
 
     std::cout << d << std::endl;

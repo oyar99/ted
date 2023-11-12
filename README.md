@@ -11,6 +11,31 @@ Please see the next guides on how to set up GCC on different platforms.
     - Linux: https://code.visualstudio.com/docs/cpp/config-linux
     - Mac: https://code.visualstudio.com/docs/cpp/config-clang-mac
 
+## Summary
+
+The following table summarizes the time complexities for different algorithms.
+
+|   Algorithm           | Time Complexity                               | Type
+|   ------------------- | --------------------------------------------- | --------------------------------------
+|   ZhangShasha         | $O(n^4)$                                      | Exact
+|   Saeed               | $O(n^8)$                                      | Exact
+|   Approx Saeed        | $O(n^2)$                                      | 2-approximation
+
+## Dataset
+
+The `data` folder contains sample inputs for trees of different sizes. It follows the below convention
+
+`sample_x_y.in` where $x$ corresponds to the number of nodes in $T$ and y to the number of nodes in $T'$.
+
+## Results
+
+The `output` folder contains the result of running each algorithm with the sample data.
+Each file contains a single number $d$ that indicates the number of operations to transform $T$ into $T'$.
+
+## Scripts
+
+The `scripts` folder contains utilities to generate random samples and test the correctness of the algorithms.
+
 ## How to compile this program?
 
 ```sh
@@ -30,7 +55,10 @@ The first line of the input is a string of the pre-order traversal of $T$.
 The second line of the input is a string of the pre-order traversal of $T'$.
 The program requires the following parameters in the specified order
 
-- The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha`, `Saeed` or `Approx`.
+|Command                           |Description
+|----------------------------------|----------------------------------------------------
+| `ZhangShasha`, `Saeed`, `Approx` | The algorithm to use to compute tree edit distance
+
 
 The first option `ZhangShasha` is an implementation of the algorithm described by ZhangShasha in 1989 in the paper
 [Simple Fast Algorithms for the Editing Distance between Trees and Related Problems](https://www.proquest.com/docview/919771926) which
@@ -44,4 +72,10 @@ The second option `Saeed` is an exact algorithm adapted from the paper [1+ε app
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Saeed
+```
+
+The third option `Approx` is an implementation of the approximation scheme described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388).
+
+```sh
+ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx
 ```
