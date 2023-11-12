@@ -7,7 +7,7 @@ total=0
 passed=0
 
 # Compile the app with g++
-g++ -o ted.exe -Isrc/models -Isrc/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
+g++ -o ted.exe -I./src/models -I./src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
 
 # Loop through list of algorithms
 for algo in "${algos[@]}"; do
