@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_set>
 
 /**
  * Represents a node-labeled rooted tree data structure referred to as T.
@@ -28,6 +29,11 @@ struct Tree {
     int root;
     // Number of nodes in T.
     int n;
+
+    /**
+     * Constructs an empty tree
+    */
+    Tree();
 
 
     /**
@@ -64,6 +70,12 @@ struct Tree {
      * @returns The preorder traversal of T
     */
     std::string pre_order() const;
+
+    /**
+     * Gets a preorder string unique representation of the forest T[l, r] in linear time,
+     * excluding nodes in the exclude set.
+    */
+    std::string pre_order(int l, int r, const std::unordered_set<int>& exclude) const;
 
     /**
      * Uses Heavy-light decomposition to return a set of vertex disjoint paths
@@ -137,6 +149,13 @@ struct Tree {
      * @returns The keyroots of T for the rightmost leaves
     */
     std::vector<int> keyroots_r() const;
+
+    /**
+     * Computes the depth of all nodes in the tree.
+     * 
+     * By definition the depth of the root node is 1.
+    */
+    std::vector<int> depth() const;
 };
 
 #endif

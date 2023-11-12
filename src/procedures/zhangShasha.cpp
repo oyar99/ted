@@ -29,7 +29,7 @@ std::vector<std::vector<int>> ZhangShasha::ted_complete(const Tree& t1, const Tr
     //      fd[i][j+1] + 1,
     //      fd[i+1][j+1] + cost of relabeling T1[i] to T2[j],
     // );
-    std::vector<std::vector<int>> td(n + 1, std::vector<int>(m + 1));
+    std::vector<std::vector<int>> td(n + 1, std::vector<int>(m + 1, -1));
 
     // use tabulation for computing forest edit distance - FED
     // fd[i][j] corresponds to the FED between the sub-forests T1(i, rightmost(k)) and T2(j, rightmost(l)) for fixed
@@ -83,7 +83,13 @@ std::vector<std::vector<int>> ZhangShasha::ted_complete(const Tree& t1, const Tr
     return td;
 }
 
-std::vector<std::vector<int>> ZhangShasha::fed(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, const std::vector<std::vector<int>>& td) {
+int ZhangShasha::fed(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, const std::vector<std::vector<int>>& td) {
+    std::vector<std::vector<int>> ted = ZhangShasha::fed_complete(t1, il, ir, t2, jl, jr, td);
+
+    return ted[il][jl];
+}
+
+std::vector<std::vector<int>> ZhangShasha::fed_complete(const Tree& t1, int il, int ir, const Tree& t2, int jl, int jr, const std::vector<std::vector<int>>& td) {
     int n = t1.n;
     int m = t2.n;
 

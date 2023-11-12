@@ -1,6 +1,12 @@
 #include <tree.h>
 #include <functional>
 #include <unordered_set>
+#include <stack>
+
+Tree::Tree() {
+    root = -1;
+    n = 0;
+}
 
 Tree::Tree(const std::string& pre_order) {
     if (pre_order.size() == 0) {
@@ -73,6 +79,37 @@ std::string Tree::pre_order() const {
     };
 
     pre_order_inner(root);
+
+    return pre_order;
+}
+
+std::string Tree::pre_order(int l, int r, const std::unordered_set<int>& exclude) const {
+    if (l > r) {
+        return std::string();
+    }
+
+    std::string pre_order;
+
+    std::function<void(int)> pre_order_inner = [&](int u) {
+        bool include = exclude.count(u) <= 0;
+        
+        if (include) {
+            pre_order += std::to_string(labels[u]);
+            pre_order += "(";
+        }
+
+        if (u < r) {
+            for (int v: adj[u]) {
+                pre_order_inner(v);
+            }
+        }
+
+        if (include) {
+            pre_order += ")";
+        }
+    };
+
+    pre_order_inner(l);
 
     return pre_order;
 }
@@ -209,4 +246,23 @@ std::vector<int> Tree::keyroots_r() const {
     }
 
     return keyroots;
+}
+
+std::vector<int> Tree::depth() const {
+    std::vector<int> d(n + 1);
+    d[root] = 1;
+
+    std::stack<int> s;
+    s.push(root);
+
+    while (!s.empty()) {
+        int u = s.top();
+        s.pop();
+
+        for (int v: adj[u]) {
+            d[v] = d[u] + 1;
+        }
+    }
+
+    return d;
 }

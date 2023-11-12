@@ -71,7 +71,8 @@
         "functional": "cpp",
         "set": "cpp",
         "xtree": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "stack": "cpp"
     },
     "cSpell.language": "en,es-ES",
     "cSpell.words": [
@@ -81,6 +82,7 @@
         "fedij",
         "Jhon",
         "keyroots",
+        "lforest",
         "Saaed",
         "Saeed",
         "SAEEDSCHEME",

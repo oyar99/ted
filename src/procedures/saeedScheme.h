@@ -95,9 +95,21 @@ namespace SaeedScheme {
      * @param t2 An ordered labeled rooted tree
      * @param s1 A spine from T1
      * @param s2 A spine from T2
+     * @param rl1 A map to get the outermost right leaf for any node in T1
+     * @param rl2 A map to get the outermost right leaf for any node in T2
+     * @param d A map to get the depth for any node in T2
      * @param td Tree edit distances needed to compute the edit distance for the two spines
     */
-    int sed(const Tree& t1, const Tree& t2, const std::vector<int>& s1, const std::vector<int>& s2, const std::vector<std::vector<int>>& td);
+    void sed(
+        const Tree& t1, 
+        const Tree& t2, 
+        const std::vector<int>& s1, 
+        const std::vector<int>& s2,
+        const std::vector<int>& rl1,
+        const std::vector<int>& rl2,
+        const std::vector<int>& d,
+        std::vector<std::vector<int>>& td
+    );
 }
 
 #endif
