@@ -9,7 +9,7 @@ namespace SaeedScheme {
      * described by Saeed Seddighin and others in 2019 in the paper 1+ϵ Approximation of Tree Edit
      * Distance in Quadratic Time.
      * 
-     * It required O(n^8) time. Though it can be improved with some of the ideas in the paper.
+     * It required O(n^6) time. Though it can be improved with some of the ideas in the paper.
 
      * @param t1 An ordered labeled rooted tree
      * @param t2 An ordered labeled rooted tree

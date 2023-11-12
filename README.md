@@ -18,7 +18,7 @@ The following table summarizes the time complexities for different algorithms.
 |   Algorithm           | Time Complexity                               | Type
 |   ------------------- | --------------------------------------------- | --------------------------------------
 |   ZhangShasha         | $O(n^4)$                                      | Exact
-|   Saeed               | $O(n^8)$                                      | Exact
+|   Saeed               | $O(n^6)$                                      | Exact
 |   Approx Saeed        | $O(n^2)$                                      | 2-approximation
 
 ## Dataset
@@ -73,7 +73,7 @@ runs in $O(n^4)$ time.
 ted.exe < data/sample_5_8.in > output/sample_5_8.out ZhangShasha
 ```
 
-The second option `Saeed` is an exact algorithm adapted from the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388) that runs in $O(n^8)$ time. It clearly performs way worse than `ZhangShasha`, but it demonstrates the key ideas to make a quadratic approximation possible.
+The second option `Saeed` is an exact algorithm adapted from the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388) that runs in $O(n^6)$ time. It clearly performs way worse than `ZhangShasha`, but it demonstrates the key ideas to make a quadratic approximation possible.
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Saeed

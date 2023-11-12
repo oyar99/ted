@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
      *          This will run an exact algorithm that uses a variant of the algorithm described in the paper
      *          1+ϵ Approximation of Tree Edit Distance in Quadratic Time.
      * 
-     *          Time complexity: O(n^8)
+     *          Time complexity: O(n^6)
      * 
      * The input should follow these rules.
      * 
