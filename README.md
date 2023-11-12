@@ -40,7 +40,7 @@ runs in $O(n^8)$ time.
 ted.exe < data/sample_5_8.in > output/sample_5_8.out ZhangShasha
 ```
 
-The second option `Saeed` is an adaptation of the algorithm described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388) that runs in $O(n^8)$ time. It clearly performs way worse than `ZhangShasha`, but it demonstrates the key ideas to make a quadratic approximation possible.
+The second option `Saeed` is an exact algorithm adapted from the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388) that runs in $O(n^8)$ time. It clearly performs way worse than `ZhangShasha`, but it demonstrates the key ideas to make a quadratic approximation possible.
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Saeed
