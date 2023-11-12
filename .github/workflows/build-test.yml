@@ -10,6 +10,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install g++ compiler
         run: sudo apt-get install g++
+      - name: run
+        run: g++ -o ted.exe -I /src/models -I /src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
       - name: Run bash script
-        run: bash scripts/tests-ubuntu.sh
+        run: bash scripts/test.sh
 
