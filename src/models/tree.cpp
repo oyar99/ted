@@ -11,6 +11,7 @@ Tree::Tree() {
 Tree::Tree(const std::string& pre_order) {
     if (pre_order.size() == 0) {
         root = -1;
+        n = 0;
         return;
     }
 
@@ -98,8 +99,8 @@ std::string Tree::pre_order(int l, int r, const std::unordered_set<int>& exclude
             pre_order += "(";
         }
 
-        if (u < r) {
-            for (int v: adj[u]) {
+        for (int v: adj[u]) {
+            if (v <= r) {
                 pre_order_inner(v);
             }
         }
@@ -189,6 +190,10 @@ std::vector<int> Tree::leftmost() const {
         }
     };
 
+    if (root == -1) {
+        return std::vector<int>();
+    }
+
     dfs(root);
 
     return ll;
@@ -224,6 +229,10 @@ std::vector<int> Tree::rightmost() const {
             rl[u] = rl[v];
         }
     };
+
+    if (root == -1) {
+        return std::vector<int>();
+    }
 
     dfs(root);
 
@@ -261,8 +270,25 @@ std::vector<int> Tree::depth() const {
 
         for (int v: adj[u]) {
             d[v] = d[u] + 1;
+            s.push(v);
         }
     }
 
     return d;
+}
+
+std::vector<int> Tree::get_upwards_path(int u, int v) const {
+    std::vector<int> p;
+
+    while (u != -1) {
+        p.push_back(u);
+
+        if (u == v) {
+            return p;
+        }
+
+        u = parent[u];
+    }
+
+    return std::vector<int>();
 }

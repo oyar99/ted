@@ -72,7 +72,7 @@ struct Tree {
     std::string pre_order() const;
 
     /**
-     * Gets a preorder string unique representation of the forest T[l, r] in linear time,
+     * Gets a preorder string unique representation of the tree rooted at node l up to node r
      * excluding nodes in the exclude set.
     */
     std::string pre_order(int l, int r, const std::unordered_set<int>& exclude) const;
@@ -156,6 +156,13 @@ struct Tree {
      * By definition the depth of the root node is 1.
     */
     std::vector<int> depth() const;
+
+    /**
+     * Gets the path upwards from node u to node v.
+     *
+     * If it is not possible to reach node v moving upwards, then returns an empty set.
+    */
+    std::vector<int> get_upwards_path(int u, int v) const;
 };
 
 #endif

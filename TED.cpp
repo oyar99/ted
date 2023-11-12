@@ -39,7 +39,6 @@ int main(int argc, char *argv[]) {
      * 
      * The program accepts the following arguments
      * 
-     * -A indicates which algorithm should be used. Available options are:
      *      "Approx"
      * 
      *          This will run the default approximation scheme which implements the algorithm
@@ -53,12 +52,15 @@ int main(int argc, char *argv[]) {
      * 
      *          This will run an exact algorithm that uses dynamic programming to find a solution.
      *          This algorithm is one of the building blocks for the approximation scheme.
-     *          If this option is used, the ε parameter is ignored.
      * 
      *          Time complexity: O(n^4)
      * 
-     * -E indicates the approximation factor to use for the approximation scheme. It should be a value
-     * greater than zero.
+     *      "Saeed"
+     * 
+     *          This will run an exact algorithm that uses a variant of the algorithm described in the paper
+     *          1+ϵ Approximation of Tree Edit Distance in Quadratic Time.
+     * 
+     *          Time complexity: O(n^8)
      * 
      * The input should follow these rules.
      * 
@@ -92,13 +94,13 @@ int main(int argc, char *argv[]) {
     Tree t1(input_trees.first);
     Tree t2(input_trees.second);
 
-    std::string algorithm(argc <= 1 ? "Approx" : argv[1]);
+    std::string algorithm(argc <= 1 ? "Saeed" : argv[1]);
 
     int d = -1;
 
     if (algorithm == "ZhangShasha") {
         d = compute_ZhangShasha(t1, t2);
-    } else if (algorithm == "Approx") {
+    } else if (algorithm == "Saeed") {
         d = compute_SaeedScheme(t1, t2);
     }
 

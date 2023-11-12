@@ -113,7 +113,7 @@ std::vector<std::vector<int>> ZhangShasha::fed_complete(const Tree& t1, int il, 
     }
 
     for (int j = jl; j <= jr; ++j) {
-        t1_rightmost[j] = std::min(t1_rightmost[j], jr);
+        t2_rightmost[j] = std::min(t2_rightmost[j], jr);
     }
 
     std::vector<std::vector<int>> fd(n + 2, std::vector<int>(m + 2, -1));

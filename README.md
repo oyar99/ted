@@ -30,7 +30,7 @@ The first line of the input is a string of the pre-order traversal of $T$.
 The second line of the input is a string of the pre-order traversal of $T'$.
 The program requires the following parameters in the specified order
 
-- The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha` or `Approx`.
+- The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha`, `Saeed` or `Approx`.
 
 The first option `ZhangShasha` is an implementation of the algorithm described by ZhangShasha in 1989 in the paper
 [Simple Fast Algorithms for the Editing Distance between Trees and Related Problems](https://www.proquest.com/docview/919771926) which
@@ -40,8 +40,8 @@ runs in $O(n^4)$ time.
 ted.exe < data/sample_5_8.in > output/sample_5_8.out ZhangShasha
 ```
 
-The second option is an approximation algorithm described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388). The implementation uses $\varepsilon = 1$ and so the algorithm returns an answer that is at most twice the optimal.
+The second option is an adaptation of the algorithm described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388) that runs in $O(n^8)$ time. It clearly performs way worse than `ZhangShasha`, but it demonstrates the key ideas to make a quadratic approximation possible.
 
 ```sh
-ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx
+ted.exe < data/sample_5_8.in > output/sample_5_8.out Saeed
 ```
