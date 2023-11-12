@@ -11,7 +11,7 @@ jobs:
       - name: Install g++ compiler
         run: sudo apt-get install g++
       - name: run
-        run: g++ -o ted.exe -I /src/models -I /src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
+        run: g++ -o ted.exe -I ./src/models -I ./src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
       - name: Run bash script
         run: bash scripts/test.sh
 
