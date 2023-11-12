@@ -26,9 +26,8 @@ Given a rooted tree $T$, we can represent the pre-order traversal of $T$ in such
 $label(u)$ followed by a matching parenthesis that encloses the subtree rooted at $u$. This representation is unique for all possible
 trees.
 
-The first line of the input is a string of the pre-order traversal of $T$ as explained above.
-The second line of the input is a string of the pre-order traversal of $T'$ as explained above.
-
+The first line of the input is a string of the pre-order traversal of $T$.
+The second line of the input is a string of the pre-order traversal of $T'$.
 The program requires the following parameters in the specified order
 
 - The algorithm to use to compute tree edit distance. Either of these values: `ZhangShasha` or `Approx`.
