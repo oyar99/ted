@@ -20,7 +20,7 @@ for algo in "${algos[@]}"; do
     # Run the app with the input file and redirect the output to a file
     ./ted.exe < $file > output/$algo/${name##*/}.out $algo
 
-    # Increment the total number of passed tests by one
+    # Increment the total number of tests by one
     ((total++))
 
     # Compare the output file with the expected file
@@ -29,7 +29,7 @@ for algo in "${algos[@]}"; do
     if [ $? -eq 0 ]; then
         # If the exit status is 0, the files are identical
         echo "Test $name passed"
-        # Increment the number of passed tests for the algorithm by one
+        # Increment the number of passed tests by one
         ((passed++))
     else
         # If the exit status is not 0, the files are different
@@ -39,9 +39,9 @@ for algo in "${algos[@]}"; do
     done
 done
 
-# Calculate the percentage of passed tests for the algorithm
+# Calculate the percentage of passed tests
 percentage=$(( passed * 100/total ))
-# Print the number and percentage of passed tests for the command
+# Print the number and percentage of passed tests
 echo
 
 GREEN='\033[0;32m'

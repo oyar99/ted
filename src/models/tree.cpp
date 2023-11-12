@@ -53,7 +53,7 @@ Tree::Tree(const std::string& pre_order) {
         }
     }
 
-    // shrunk vectors to fit actual number of nodes in T
+    // shrink vectors to fit actual number of nodes in T
     n = idx - 1;
 
     adj = std::vector<std::vector<int>>(adj.begin(), adj.begin() + idx);
@@ -148,8 +148,8 @@ std::vector<std::vector<int>> Tree::decompose() const {
     std::vector<std::vector<int>> paths;
     std::unordered_set<int> covered;
 
-    // For each node u such that size(u) < size(v)/2 for all children u of v
-    // we will start a path moving downwards until we reach a leaf node.
+    // we will start a path moving downwards until we reach a leaf node. We will choose
+    // the heaviest edge to move downwards.
     for (int i = 1; i <= n; ++i) {
         int u = i;
         if (covered.count(u) > 0) {

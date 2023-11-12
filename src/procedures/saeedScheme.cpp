@@ -24,16 +24,12 @@ int SaeedScheme::ted(const Tree& t1_or, const Tree& t2_or) {
     std::vector<int> d2 = t2.depth();
 
     // Sort paths so we can iterate in bottom-up manner
-    auto spine_comp_t1 = [&](const std::vector<int>& s1, const std::vector<int>& s2) {
+    auto spine_comp = [&](const std::vector<int>& s1, const std::vector<int>& s2) {
         return s1[s1.size() - 1] > s2[s2.size() - 1];
     };
 
-    auto spine_comp_t2 = [&](const std::vector<int>& s1, const std::vector<int>& s2) {
-        return s1[s1.size() - 1] > s2[s2.size() - 1];
-    };
-
-    std::sort(t1_spines.begin(), t1_spines.end(), spine_comp_t1);
-    std::sort(t2_spines.begin(), t2_spines.end(), spine_comp_t2);
+    std::sort(t1_spines.begin(), t1_spines.end(), spine_comp);
+    std::sort(t2_spines.begin(), t2_spines.end(), spine_comp);
 
     std::vector<int> t1_rightmost = t1.rightmost();
     std::vector<int> t2_rightmost = t2.rightmost();
@@ -76,8 +72,7 @@ void SaeedScheme::sed(
 
     // Computes a new entire forest. The index of this forest may differ from indices in the original tree representation
     auto get_forest = [&](int i, int j, const std::vector<int>& s, const Tree& t) {
-        // we want to generate a forest that doesn't include nodes in the path s 
-        // nor in the subtree rooted at s[x]
+        // we want to generate a forest t[i, j] that doesn't include nodes in the path s
         std::unordered_set exclude(s.begin(), s.end());
 
         return Tree(t.pre_order(i, j, exclude));
@@ -103,7 +98,7 @@ void SaeedScheme::sed(
 
             for (int k = 0; k < i; ++k) {
                 for (int l = s2[j] + 1; l < rl2[s2[j]] + 1; ++l) {
-                    // At this point td[s1[k]][l] should be solved
+                    // At this point td[s1[k]][l] should already be solved
                     assert(td[s1[k]][l] != std::numeric_limits<std::int32_t>::max());
 
                     int R = (i - k - 1) + (d2[l] - d2[s2[j]] - 1);

@@ -25,7 +25,7 @@ The following table summarizes the time complexities for different algorithms.
 
 The `data` folder contains sample inputs for trees of different sizes. It follows the below convention
 
-`sample_x_y.in` where $x$ corresponds to the number of nodes in $T$ and y to the number of nodes in $T'$.
+`sample_x_y.in` where $x$ corresponds to the number of nodes in $T$ and $y$ to the number of nodes in $T'$.
 
 ## Results
 

@@ -30,9 +30,6 @@ std::pair<std::string, std::string> get_input_trees() {
  * 
  * Tree Edit Distance. Given two node-labeled rooted trees T and T' each of size at most n, what
  * is the minimum number of elementary operations needed to transform T into T'?
- * 
- * Theorem. 
- * Tree Edit Distance accepts a (1+ε)-approximation scheme that runs in O(n^2/ε^3) time.
 */
 int main(int argc, char *argv[]) {
     /**
@@ -46,7 +43,7 @@ int main(int argc, char *argv[]) {
      * 
      *      "Approx"
      * 
-     *          This will run the default approximation scheme which implements the algorithm
+     *          This will run an approximation scheme which implements the algorithm
      *          described in the paper 1+ϵ Approximation of Tree Edit Distance in Quadratic Time.
      *          By default, it will set ϵ to 1. That is, the answer will be at most 2 times the
      *          optimal.
