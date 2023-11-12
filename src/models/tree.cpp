@@ -67,8 +67,10 @@ std::string Tree::pre_order() const {
     }
 
     std::string pre_order;
+    std::unordered_set<int> visited;
 
     std::function<void(int)> pre_order_inner = [&](int u) {
+        visited.insert(u);
         pre_order += std::to_string(labels[u]);
         pre_order += "(";
 
@@ -79,7 +81,11 @@ std::string Tree::pre_order() const {
         pre_order += ")";
     };
 
-    pre_order_inner(root);
+    for (int i = 1; i <= n; ++i) {
+        if (visited.count(i) <= 0) {
+            pre_order_inner(i);
+        }
+    }
 
     return pre_order;
 }
@@ -90,9 +96,11 @@ std::string Tree::pre_order(int l, int r, const std::unordered_set<int>& exclude
     }
 
     std::string pre_order;
+    std::unordered_set<int> visited;
 
     std::function<void(int)> pre_order_inner = [&](int u) {
         bool include = exclude.count(u) <= 0;
+        visited.insert(u);
         
         if (include) {
             pre_order += std::to_string(labels[u]);
@@ -110,7 +118,11 @@ std::string Tree::pre_order(int l, int r, const std::unordered_set<int>& exclude
         }
     };
 
-    pre_order_inner(l);
+    for (int i = l; i <= r; ++i) {
+        if (visited.count(i) <= 0) {
+            pre_order_inner(i);
+        }
+    }
 
     return pre_order;
 }
@@ -137,40 +149,33 @@ std::vector<std::vector<int>> Tree::decompose() const {
     std::unordered_set<int> covered;
 
     // For each node u such that size(u) < size(v)/2 for all children u of v
-    // we will start a path moving upwards until we either go through a light edge or reach the root node.
+    // we will start a path moving downwards until we reach a leaf node.
     for (int i = 1; i <= n; ++i) {
         int u = i;
         if (covered.count(u) > 0) {
             continue;
         }
 
-        bool should_pick = true;
+        // start a path downwards from u
+        std::vector<int> path;
 
-        for (int v: adj[u]) {
-            if (size[v] >= (size[u] + 1) / 2) {
-                should_pick = false;
-                break;
-            }
-        }
+        int max_s = 0;
 
-        if (should_pick) {
-            // start a path upwards from u
-            std::vector<int> path;
+        do {
+            path.push_back(u);
+            covered.insert(u);
 
-            // We will continue our path as long as we haven't reached the root node or the edge between parent[u]->u is heavy
-            while (u != 0) {
-                path.push_back(u);
-                covered.insert(u);
-
-                if (size[u] < (size[parent[u]] + 1) / 2) {
-                    break;
+            max_s = 0;
+            for (int v: adj[u]) {
+                if (size[v] >= max_s) {
+                    u = v;
+                    max_s = size[v];
                 }
-
-                u = parent[u];
             }
+        } while (max_s != 0);
 
-            paths.push_back(path);
-        }
+        std::reverse(path.begin(), path.end());
+        paths.push_back(path);
     }
 
     return paths;
@@ -220,9 +225,11 @@ std::vector<int> Tree::keyroots_l() const {
 std::vector<int> Tree::rightmost() const {
     // We will first compute the rightmost node for each node u
     std::vector<int> rl(n + 1);
+    std::unordered_set<int> visited;
 
     std::function<void(int)> dfs = [&](int u) {
         rl[u] = u;
+        visited.insert(u);
 
         for (int v: adj[u]) {
             dfs(v);
@@ -234,7 +241,11 @@ std::vector<int> Tree::rightmost() const {
         return std::vector<int>();
     }
 
-    dfs(root);
+    for (int i = 1; i <= n; ++i) {
+        if (visited.count(i) <= 0) {
+            dfs(i);
+        }
+    }
 
     return rl;
 }

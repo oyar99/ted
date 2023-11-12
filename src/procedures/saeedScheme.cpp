@@ -4,7 +4,7 @@
 #include <limits>
 #include <cstdint>
 #include <algorithm>
-
+#include <assert.h>
 
 int SaeedScheme::ted(const Tree& t1_or, const Tree& t2_or) {
     // Let us first add a dummy root on top each tree by enclosing its preorder traversal in a zero-labeled node
@@ -25,11 +25,11 @@ int SaeedScheme::ted(const Tree& t1_or, const Tree& t2_or) {
 
     // Sort paths so we can iterate in bottom-up manner
     auto spine_comp_t1 = [&](const std::vector<int>& s1, const std::vector<int>& s2) {
-        return s1[d1[0]] > s2[d1[0]];
+        return s1[s1.size() - 1] > s2[s2.size() - 1];
     };
 
     auto spine_comp_t2 = [&](const std::vector<int>& s1, const std::vector<int>& s2) {
-        return s1[d2[0]] > s2[d2[0]];
+        return s1[s1.size() - 1] > s2[s2.size() - 1];
     };
 
     std::sort(t1_spines.begin(), t1_spines.end(), spine_comp_t1);
@@ -103,6 +103,9 @@ void SaeedScheme::sed(
 
             for (int k = 0; k < i; ++k) {
                 for (int l = s2[j] + 1; l < rl2[s2[j]] + 1; ++l) {
+                    // At this point td[s1[k]][l] should be solve
+                    assert(td[s1[k]][l] != std::numeric_limits<std::int32_t>::max());
+
                     int R = (i - k - 1) + (d2[l] - d2[s2[j]] - 1);
 
                     // TODO: 
