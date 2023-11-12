@@ -184,9 +184,11 @@ std::vector<std::vector<int>> Tree::decompose() const {
 std::vector<int> Tree::leftmost() const {
     // We will first compute the leftmost node for each node u
     std::vector<int> ll(n + 1);
+    std::unordered_set<int> visited;
 
     std::function<void(int)> dfs = [&](int u) {
         ll[u] = u;
+        visited.insert(u);
 
         for (int i = adj[u].size() - 1; i >= 0; --i) {
             int v = adj[u][i];
@@ -199,7 +201,11 @@ std::vector<int> Tree::leftmost() const {
         return std::vector<int>();
     }
 
-    dfs(root);
+    for (int i = 1; i <= n; ++i) {
+        if (visited.count(i) <= 0) {
+            dfs(i);
+        }
+    }
 
     return ll;
 }
