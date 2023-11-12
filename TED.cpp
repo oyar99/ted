@@ -1,5 +1,5 @@
 #include <tree.h>
-#include <ZhangShasha.h>
+#include <zhangShasha.h>
 #include <saeedScheme.h>
 #include <approxScheme.h>
 #include <iostream>
