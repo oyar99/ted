@@ -39,7 +39,7 @@ The `scripts` folder contains utilities to generate random samples and test the 
 ## How to compile this program?
 
 ```sh
-g++ -o ted.exe -I ./src/models -I ./src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
+g++ -o ted.exe -I./src/models -I./src/procedures *.cpp src/models/*.cpp src/procedures/*.cpp
 ```
 
 ## How to run this program?
