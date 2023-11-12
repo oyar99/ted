@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Go to root directory
-cd ..
-
 # Declare collection of algorithms to run
 declare -a algos=("ZhangShasha" "Saeed")
 
