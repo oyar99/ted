@@ -36,6 +36,11 @@ Each file contains a single number $d$ that indicates the number of operations t
 
 The `scripts` folder contains utilities to generate random samples and test the correctness of the algorithms.
 
+|Script                            |Description
+|----------------------------------|-----------------------------------------------------------------------------
+| `test.sh`                        | Builds and tests the implementations for `ZhangShasha` and `Saeed` algorithm.
+| `random_sample.py`               | Generates a random tree using its pre-order traversal.
+
 ## How to compile this program?
 
 ```sh
