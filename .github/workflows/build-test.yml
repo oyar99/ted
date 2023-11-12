@@ -1,10 +1,14 @@
 name: Build & Test
-on: [push, pull_request]
+on: [push]
+strategy:
+  matrix:
+    compiler: [gcc, clang]
 jobs:
-  run-script:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # required for accessing files in the repository
-      - name: Run test.sh
-        run: bash scripts/test.sh
-        # if the script exits with a non-zero value, the workflow will fail
+    - uses: actions/checkout@v1
+    - name: Run test.sh
+      env:
+        CC: ${{ matrix.compiler }}
+      run: bash scripts/test.sh
