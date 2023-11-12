@@ -11,5 +11,5 @@ jobs:
       - name: Install g++ compiler
         run: sudo apt-get install g++
       - name: Run bash script
-        run: bash scripts/test.sh
+        run: bash scripts/tests-ubuntu.sh
 
