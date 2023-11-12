@@ -108,10 +108,6 @@ void SaeedScheme::sed(
 
                     int R = (i - k - 1) + (d2[l] - d2[s2[j]] - 1);
 
-                    // TODO: 
-                    // Implement variation of fed that can be computed efficiently for forests that are not
-                    // necessarily contiguous. 
-                    // In other terms, we want to create forest F such that F = T - S - Tx for any x
                     Tree f1_l = get_forest(s1[i], s1[k] - 1, s1, t1);
                     Tree f1_r = get_forest(rl1[s1[k]] + 1, rl1[s1[i]], s1, t1);
                     Tree f2_l = get_forest(s2[j], l - 1, t2.get_upwards_path(l, s2[j]) /* l does not necessarily belong in s2 */, t2);

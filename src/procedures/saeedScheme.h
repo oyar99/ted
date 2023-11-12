@@ -6,14 +6,14 @@
 
 namespace SaeedScheme {
     /**
-     * Computes the Tree Edit Distance (TED) between T1 and T2 using the approximation scheme algorithm 
+     * Computes the Tree Edit Distance (TED) between T1 and T2 using a variant of the approximation scheme algorithm 
      * described by Saeed Seddighin and others in 2019 in the paper 1+ϵ Approximation of Tree Edit
      * Distance in Quadratic Time
 
      * @param t1 An ordered labeled rooted tree
      * @param t2 An ordered labeled rooted tree
      * 
-     * @returns An integer that represents an approximation for the number of operations needed to transform t1 into t2.
+     * @returns An integer that represents the number of operations needed to transform t1 into t2.
      * Each operation has unit cost.
     */
     int ted(const Tree& t1, const Tree& t2);
