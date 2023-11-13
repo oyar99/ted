@@ -2,7 +2,6 @@
 #include <zhangShasha.h>
 #include <saeedScheme.h>
 #include <saeedSchemeOpt.h>
-#include <alternative.h>
 #include <iostream>
 
 int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
@@ -16,10 +15,6 @@ int compute_SaeedScheme(const Tree& t1, const Tree& t2) {
 int compute_SaeedSchemeOpt(const Tree& t1, const Tree&t2) {
     return SaeedSchemeOpt::ted(t1, t2);
 }
-
-int compute_OurAlgorithm(const Tree& t1, const Tree&t2) {
-    return Alternative::ted(t1, t2);
-} 
 
 std::pair<std::string, std::string> get_input_trees() {
     std::string t1_preorder;
@@ -102,8 +97,6 @@ int main(int argc, char *argv[]) {
         d = compute_SaeedScheme(t1, t2);
     } else if (algorithm == "SaeedOpt") {
         d = compute_SaeedSchemeOpt(t1, t2);
-    } else if (algorithm == "Our") {
-        d = compute_OurAlgorithm(t1,t2);
     }
 
     std::cout << d << std::endl;
