@@ -4,6 +4,9 @@
 #include <approxScheme.h>
 #include <alternative.h>
 #include <iostream>
+#include <chrono>
+
+using namespace std::chrono;
 
 int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
     return ZhangShasha::ted(t1, t2);
@@ -96,6 +99,8 @@ int main(int argc, char *argv[]) {
      * 
     */
 
+    auto start = high_resolution_clock::now();
+
     const auto& input_trees = get_input_trees();
 
     Tree t1(input_trees.first);
@@ -115,5 +120,10 @@ int main(int argc, char *argv[]) {
         d = compute_OurAlgorithm(t1,t2);
     }
 
+    auto stop = high_resolution_clock::now();
+
     std::cout << d << std::endl;
+
+    auto duration = duration_cast<microseconds>(stop - start);
+    std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos" << std::endl;
 }
