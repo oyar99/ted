@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Declare collection of algorithms to run
-declare -a algos=("ZhangShasha" "Saeed")
+declare -a algos=("ZhangShasha" "Saeed" "SaeedOpt")
 
 total=0
 passed=0

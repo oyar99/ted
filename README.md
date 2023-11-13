@@ -19,7 +19,6 @@ The following table summarizes the time complexities for different algorithms.
 |   ------------------- | --------------------------------------------- | --------------------------------------
 |   ZhangShasha         | $O(n^4)$                                      | Exact
 |   Saeed               | $O(n^6)$                                      | Exact
-|   Approx Saeed        | $O(n^2)$                                      | 2-approximation
 
 ## Dataset
 
@@ -62,7 +61,7 @@ The program requires the following parameters in the specified order
 
 |Command                           |Description
 |----------------------------------|----------------------------------------------------
-| `ZhangShasha`, `Saeed`, `Approx` | The algorithm to use to compute tree edit distance
+| `ZhangShasha`, `Saeed` | The algorithm to use to compute tree edit distance
 
 
 The first option `ZhangShasha` is an implementation of the algorithm described by ZhangShasha in 1989 in the paper
@@ -77,10 +76,4 @@ The second option `Saeed` is an exact algorithm adapted from the paper [1+ε app
 
 ```sh
 ted.exe < data/sample_5_8.in > output/sample_5_8.out Saeed
-```
-
-The third option `Approx` is an implementation of the approximation scheme described in the paper [1+ε approximation of tree edit distance in quadratic time](https://dl.acm.org/doi/10.1145/3313276.3316388).
-
-```sh
-ted.exe < data/sample_5_8.in > output/sample_5_8.out Approx
 ```

@@ -1,4 +1,4 @@
-#include <approxScheme.h>
+#include <saeedSchemeOpt.h>
 #include <zhangShasha.h>
 #include <cmath>
 #include <limits>
@@ -6,80 +6,46 @@
 #include <algorithm>
 #include <assert.h>
 
-ApproxScheme::FEDDS::FEDDS(
+SaeedSchemeOpt::FEDDS::FEDDS(
     const Tree& f1,
     const Tree& f2,
     const std::vector<std::vector<int>>& td
 ) : f1(f1), f2(f2) {
-    int n = f1.n + f2.n;
+    std::vector<std::vector<int>> t = ZhangShasha::ted_complete(f1, f2);
 
-    for (int k = 1; k <= n; k *= 2) {
-        feds.insert({ k, FEDDSK(f1, f2, k, td)});
-    }
-}
-
-int ApproxScheme::FEDDS::query(
-    int il,
-    int ir,
-    int jl,
-    int jr
-) {
-    int n = f1.n + f2.n;
-
-    for (int k = 1; k <= n; k *= 2) {
-        int d = feds.at(k).query(il, ir, jl, jr);
-
-        if (d >= 0) {
-            return d;
-        }
-    }
-
-    return -1;
-}
-
-ApproxScheme::FEDDSK::FEDDSK(
-    const Tree& f1,
-    const Tree& f2,
-    int k,
-    const std::vector<std::vector<int>>& td
-) : f1(f1), f2(f2), k(k) {
-    if (k < 4) {
-        return;
-    }
-
-    for (int i = 1; i <= f1.n; i += (k/4)) {
-        for (int j = 1; j <= f2.n; j += (k/4)) {
-            std::vector<std::vector<int>> fedij = ZhangShasha::fed_complete(f1, i, f1.n, f2, j, f2.n, td);
+    for (int i = 1; i <= f1.n; ++i) {
+        for (int j = 1; j <= f2.n; ++j) {
+            std::vector<std::vector<int>> fedij = ZhangShasha::fed_complete(f1, 1, i, f2, 1, j, t);
             feds.insert({ std::to_string(i) + std::to_string(j), fedij});
         }
     }
 }
 
-int ApproxScheme::FEDDSK::query(
+int SaeedSchemeOpt::FEDDS::query(
     int il,
     int ir,
     int jl,
     int jr
 ) {
-    // Find the index of the largest marked point in F less than or equal to il
-    int i = ((4 * il)/ k) * k/4;
-    // Find the index of the largest marked point in F' less than or equal to jl
-    int j = ((4 * jl)/ k) * k/4;
-
-    std::string key = std::to_string(i) + std::to_string(j); 
-
-    if (feds.count(key) > 0) {
-        int d = feds.at(key)[ir][jr];
-
-        if (d >= 0) {
-            return d;
-        }
+    if (il > ir && jl > jr) {
+        return 0;
     }
 
-    return -1;
+    if (il > ir) {
+        return jr - jl + 1;
+    }
+
+    if (jl > jr) {
+        return ir - il + 1;
+    }
+
+    std::string key = std::to_string(ir) + std::to_string(jr);
+
+    return feds[key][il][jl];
 }
 
-int ApproxScheme::ted(const Tree& t1_or, const Tree& t2_or) {
+
+int SaeedSchemeOpt::ted(const Tree& t1_or, const Tree& t2_or) {
     // Let us first add a dummy root on top each tree by enclosing its preorder traversal in a zero-labeled node
     Tree t1("0(" + t1_or.pre_order() + ")");
     Tree t2("0(" + t2_or.pre_order() + ")");
@@ -111,14 +77,14 @@ int ApproxScheme::ted(const Tree& t1_or, const Tree& t2_or) {
 
     for (auto const& s1: t1_spines) {
         for (auto const& s2: t2_spines) {
-            ApproxScheme::sed(t1, t2, s1, s2, t1_rightmost, t2_rightmost, d1, d2, size_st1, td);
+            SaeedSchemeOpt::sed(t1, t2, s1, s2, t1_rightmost, t2_rightmost, d1, d2, size_st1, td);
         }
     }
 
     return td[1][1];
 }
 
-void ApproxScheme::sed(
+void SaeedSchemeOpt::sed(
     const Tree& t1, 
     const Tree& t2, 
     const std::vector<int>& s1, 
@@ -155,54 +121,58 @@ void ApproxScheme::sed(
         return Tree(t.pre_order(i, j, exclude));
     };
 
+    auto update_leaf = [&](int i, int j) {
+        int L = cost(s1[i], s2[j]);
+
+        if (rl1[s1[i]] == s1[i]) {
+            // node ui is a leaf, so ted is simply the cost of relabeling ui and the size of
+            // subtree rooted at vj
+            td[s1[i]][s2[j]] = L + (rl2[s2[j]] - s2[j]);
+        } else if (rl2[s2[j]] == s2[j]) {
+            // node vj is a leaf, so ted is simply the cost of relabeling ui and the size of
+            // subtree rooted at ui
+            td[s1[i]][s2[j]] = L + (rl1[s1[i]] - s1[i]);
+        }
+    };
+
+    if (s1.size() == 1 || s2.size() == 1) {
+        for (int i = 0; i < s1.size(); ++i) {
+            for (int j = 0; j < s2.size(); ++j) {
+                update_leaf(i, j);
+            }
+        }
+
+        return;
+    }
+
     // Let us create a forest data structure to quickly return fed for any two proper subforests
     // One of these structures represent the forest on the left hand side of the spine, and the other one
     // the forest on the right hand side.
-    // Tree f1_l = get_forest(1, s1[0] - 1, s1, t1);
-    Tree f1_r = get_forest(rl1[s1[0]] + 1, t1.n, s1, t1);
-    // FEDDS fedds_l = FEDDS(f1_l, t2, td);
+    Tree f1_l = get_forest(s1[s1.size() - 1], s1[0], s1, t1);
+    Tree f1_r = get_forest(s1[0] + 1, t1.n, s1, t1);
     FEDDS fedds_r = FEDDS(f1_r, t2, td);
 
     for (int i = 0; i < s1.size(); ++i) {
         for (int j = 0; j < s2.size(); ++j) {
             int L = cost(s1[i], s2[j]);
 
-            if (rl1[s1[i]] == s1[i]) {
-                // node ui is a leaf, so ted is simply the cost of relabeling ui and the size of
-                // subtree rooted at vj
-                td[s1[i]][s2[j]] = L + (rl2[s2[j]] - s2[j]);
-                continue;
-            }
-
-            if (rl2[s2[j]] == s2[j]) {
-                // node vj is a leaf, so ted is simply the cost of relabeling ui and the size of
-                // subtree rooted at ui
-                td[s1[i]][s2[j]] = L + (rl1[s1[i]] - s1[i]);
-                continue;
-            }
+            update_leaf(i, j);
 
             for (int k = 0; k < i; ++k) {
-                for (int l = s2[j] + 1; l < rl2[s2[j]] + 1; ++l) {
-                    // At this point td[s1[k]][l] should already be solved
-                    assert(td[s1[k]][l] != std::numeric_limits<std::int32_t>::max());
+                Tree f1_l = get_forest(s1[i], s1[k] - 1, s1, t1);
 
+                for (int l = s2[j] + 1; l < rl2[s2[j]] + 1; ++l) {
                     int R = (i - k - 1) + (d2[l] - d2[s2[j]] - 1);
 
-                    Tree f1_l = get_forest(s1[i], s1[k] - 1, s1, t1);
                     Tree f2_l = get_forest(s2[j], l - 1, t2.get_upwards_path(l, s2[j]) /* l does not necessarily belong in s2 */, t2);
 
-                    int size_f1_r = size_st1[s1[i]] - (size_st1[s1[k]] + (d1[s1[k]] - d1[s1[i]]) + f1_l.n);
-
+                    int z = (f1_l.n - size_st1[s1[k]]) + (d1[s1[k]] - d1[s1[0]] + 1) + (rl1[s1[k]] - s1[0]);
+                    //assert(z >= 0);
                     int cl = ZhangShasha::fed(f1_l, 1, f1_l.n, f2_l, 1, f2_l.n, ZhangShasha::ted_complete(f1_l, f2_l));
-                    int cr = fedds_r.query(1, size_f1_r, rl2[l] + 1, rl2[s2[j]]);
+                    int cr = fedds_r.query(rl1[s1[k]] - s1[0] + 1, rl1[s1[i]] - s1[0], rl2[l] + 1, rl2[s2[j]]);
 
                     int C = cl + cr;
-                    //
-                    Tree f1_r = get_forest(rl1[s1[k]] + 1, rl1[s1[i]], s1, t1);
-                    Tree f2_r = get_forest(rl2[l] + 1, rl2[s2[j]], t2.get_upwards_path(l, s2[j]) /* l does not necessarily belong in s2 */, t2);
 
-                    int z = ZhangShasha::fed(f1_r, 1, f1_r.n, f2_r, 1, f2_r.n, ZhangShasha::ted_complete(f1_r, f2_r));
-                    //
                     td[s1[i]][s2[j]] = std::min(
                         td[s1[i]][s2[j]],
                         td[s1[k]][l] + R + C +  L

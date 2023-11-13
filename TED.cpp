@@ -1,7 +1,7 @@
 #include <tree.h>
 #include <zhangShasha.h>
 #include <saeedScheme.h>
-#include <approxScheme.h>
+#include <saeedSchemeOpt.h>
 #include <alternative.h>
 #include <iostream>
 
@@ -13,8 +13,8 @@ int compute_SaeedScheme(const Tree& t1, const Tree& t2) {
     return SaeedScheme::ted(t1, t2);
 }
 
-int compute_ApproxScheme(const Tree& t1, const Tree&t2) {
-    return ApproxScheme::ted(t1, t2);
+int compute_SaeedSchemeOpt(const Tree& t1, const Tree&t2) {
+    return SaeedSchemeOpt::ted(t1, t2);
 }
 
 int compute_OurAlgorithm(const Tree& t1, const Tree&t2) {
@@ -45,15 +45,6 @@ int main(int argc, char *argv[]) {
      * T1 into T2.
      * 
      * The program accepts the following arguments
-     * 
-     *      "Approx"
-     * 
-     *          This will run an approximation scheme which implements the algorithm
-     *          described in the paper 1+ϵ Approximation of Tree Edit Distance in Quadratic Time.
-     *          By default, it will set ϵ to 1. That is, the answer will be at most 2 times the
-     *          optimal.
-     * 
-     *          Time complexity: O(n^2/ε^3)
      * 
      *      "ZhangShasha"
      * 
@@ -101,7 +92,7 @@ int main(int argc, char *argv[]) {
     Tree t1(input_trees.first);
     Tree t2(input_trees.second);
 
-    std::string algorithm(argc <= 1 ? "Our" : argv[1]);
+    std::string algorithm(argc <= 1 ? "SaeedOpt" : argv[1]);
 
     int d = -1;
 
@@ -109,8 +100,8 @@ int main(int argc, char *argv[]) {
         d = compute_ZhangShasha(t1, t2);
     } else if (algorithm == "Saeed") {
         d = compute_SaeedScheme(t1, t2);
-    } else if (algorithm == "Approx") {
-        d = compute_ApproxScheme(t1, t2);
+    } else if (algorithm == "SaeedOpt") {
+        d = compute_SaeedSchemeOpt(t1, t2);
     } else if (algorithm == "Our") {
         d = compute_OurAlgorithm(t1,t2);
     }
