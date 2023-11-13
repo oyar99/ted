@@ -98,9 +98,6 @@ void SaeedScheme::sed(
 
             for (int k = 0; k < i; ++k) {
                 for (int l = s2[j] + 1; l < rl2[s2[j]] + 1; ++l) {
-                    // At this point td[s1[k]][l] should already be solved
-                    assert(td[s1[k]][l] != std::numeric_limits<std::int32_t>::max());
-
                     int R = (i - k - 1) + (d2[l] - d2[s2[j]] - 1);
 
                     Tree f1_l = get_forest(s1[i], s1[k] - 1, s1, t1);

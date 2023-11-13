@@ -4,39 +4,10 @@
 #include <tree.h>
 #include <unordered_map>
 
-namespace ApproxScheme {
-    struct  FEDDSK {
-        // Forest F definition
-        Tree f1;
-
-        // Forest F' definition
-        Tree f2;
-
-        int k;
-
-        // collection of fed distances for subforests of F and F'
-        // key is of the form ij
-        std::unordered_map<std::string, std::vector<std::vector<int>>> feds;
-
-        /**
-         * Constructs FEDDSK given two subforests F and F' in time O(n^2)
-        */
-        FEDDSK(const Tree& f1, const Tree& f2, int k, const std::vector<std::vector<int>>& td);
-
-        /**
-         * Answers queries of the form:
-         * 
-         * what is the FED between two subforests F(il, ir) and F'(jl, jr)?
-         * 
-         * It returns an approximate answer or returns -1 if it detects that FED is 
-         * larger than K
-        */
-        int query(int il, int ir, int jl, int jr);
-    };
-
+namespace SaeedSchemeOpt {
     /**
      * A data structure that given two forests F1 and F2, computes the forest edit distance 
-     * between any pair of subforests of F1 and F2 in O(1) after O(n^2) preprocessing
+     * between any pair of subforests of F1 and F2
     */
     struct FEDDS {
         // Forest F definition
@@ -45,11 +16,12 @@ namespace ApproxScheme {
         // Forest F' definition
         Tree f2;
 
-        // collection of feddsk data structures
-        std::unordered_map<int, FEDDSK> feds;
+        // collection of fed distances for subforests of F and F'
+        // key is of the form ij
+        std::unordered_map<std::string, std::vector<std::vector<int>>> feds;
 
         /**
-         * Constructs FEDDS given two subforests F and F' in time O(n^2)
+         * Constructs FEDDS given two subforests F and F'
         */
         FEDDS(const Tree& f1, const Tree& f2, const std::vector<std::vector<int>>& td);
 
@@ -58,21 +30,19 @@ namespace ApproxScheme {
          * 
          * what is the FED between two subforests F(il, ir) and F'(jl, jr)?
          * 
-         * It returns an approximate answer or returns -1 if it detects that FED is 
-         * larger than K
         */
         int query(int il, int ir, int jl, int jr);
     };
 
     /**
-     * Approximates the Tree Edit Distance (TED) between T1 and T2 using the approximation scheme algorithm 
+     * Computes the Tree Edit Distance (TED) between T1 and T2 using a variant of the approximation scheme algorithm 
      * described by Saeed Seddighin and others in 2019 in the paper 1+ϵ Approximation of Tree Edit
-     * Distance in Quadratic Time
+     * Distance in Quadratic Time. It is an optimization that seeks to reduce the number of duplicate computations
 
      * @param t1 An ordered labeled rooted tree
      * @param t2 An ordered labeled rooted tree
      * 
-     * @returns An integer that represents a 2-approximation of the number of operations needed to transform t1 into t2.
+     * @returns An integer that represents the number of operations needed to transform t1 into t2.
      * Each operation has unit cost.
     */
     int ted(const Tree& t1, const Tree& t2);
