@@ -97,7 +97,7 @@ int Alternative::ted(const Tree& T, const Tree& T1) {
         std::string s_T = T.pre_order();
         std::string s_T1 = T1.pre_order();
         int distance = string_edit_distance(s_T, s_T1);
-        total_distance += distance;
+        total_distance += distance/int(std::min(T.n, T1.n));
     }
 
     return total_distance;
