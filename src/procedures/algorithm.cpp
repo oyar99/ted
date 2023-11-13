@@ -1,4 +1,4 @@
-/*#include "tree.h"
+#include "tree.h"
 
 // Función para calcular la distancia de edición entre dos cadenas
 // Aca utilize el algoritmo de Levenshtein para calcular eso rapido con dp en O(n^2)
@@ -59,4 +59,4 @@ int ted(const Tree& T, const Tree& T1) {
     }
 
     return total_distance;
-}*/
+}

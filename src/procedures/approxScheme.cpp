@@ -150,7 +150,7 @@ void ApproxScheme::sed(
     // Computes a new entire forest. The index of this forest may differ from indices in the original tree representation
     auto get_forest = [&](int i, int j, const std::vector<int>& s, const Tree& t) {
         // we want to generate a forest t[i, j] that doesn't include nodes in the path s
-        std::unordered_set exclude(s.begin(), s.end());
+        std::unordered_set<int> exclude(s.begin(), s.end());
 
         return Tree(t.pre_order(i, j, exclude));
     };
