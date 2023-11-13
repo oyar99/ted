@@ -128,15 +128,17 @@ std::string Tree::pre_order(int l, int r, const std::unordered_set<int>& exclude
     return pre_order;
 }
 
-std::vector<std::vector<int>> Tree::decompose() const {
+std::vector<int> Tree::size_subtrees() const {
     // Let us first do a depth first traversal of the tree where
     // we compute size(u) for all u. Size(u) is defined as the number
     // of nodes in the sub-tree rooted at u plus u itself.
 
     std::vector<int> size(n + 1);
+    std::unordered_set<int> visited;
 
     std::function<void(int)> dfs = [&](int u) {
         size[u] = 1;
+        visited.insert(u);
         
         for (int v: adj[u]) {
             dfs(v);
@@ -144,7 +146,21 @@ std::vector<std::vector<int>> Tree::decompose() const {
         }
     };
 
-    dfs(root);
+    for (int i = 1; i < n; ++i) {
+        if (visited.count(i) <= 0) {
+            dfs(i);
+        }
+    }
+
+    return size;
+}
+
+std::vector<std::vector<int>> Tree::decompose() const {
+    // Let us first do a depth first traversal of the tree where
+    // we compute size(u) for all u. Size(u) is defined as the number
+    // of nodes in the sub-tree rooted at u plus u itself.
+
+    std::vector<int> size = size_subtrees();
 
     std::vector<std::vector<int>> paths;
     std::unordered_set<int> covered;
