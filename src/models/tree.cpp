@@ -2,6 +2,7 @@
 #include <functional>
 #include <unordered_set>
 #include <stack>
+#include <algorithm>
 
 Tree::Tree() {
     root = -1;

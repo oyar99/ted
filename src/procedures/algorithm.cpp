@@ -1,4 +1,6 @@
-#include "tree.h"
+#include <tree.h>
+#include <algorithm.h>
+
 
 // Función para calcular la distancia de edición entre dos cadenas
 // Aca utilize el algoritmo de Levenshtein para calcular eso rapido con dp en O(n^2)
@@ -15,7 +17,7 @@ int string_edit_distance(const std::string& s1, const std::string& s2) {
             } else if (s1[i - 1] == s2[j - 1]) {
                 dp[i][j] = dp[i - 1][j - 1];
             } else {
-                dp[i][j] = 1 + std::min({dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]});
+                dp[i][j] = 1 + std::min(std::min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]);
             }
         }
     }
