@@ -197,7 +197,12 @@ void ApproxScheme::sed(
                     int cr = fedds_r.query(1, size_f1_r, rl2[l] + 1, rl2[s2[j]]);
 
                     int C = cl + cr;
-                    
+                    //
+                    Tree f1_r = get_forest(rl1[s1[k]] + 1, rl1[s1[i]], s1, t1);
+                    Tree f2_r = get_forest(rl2[l] + 1, rl2[s2[j]], t2.get_upwards_path(l, s2[j]) /* l does not necessarily belong in s2 */, t2);
+
+                    int z = ZhangShasha::fed(f1_r, 1, f1_r.n, f2_r, 1, f2_r.n, ZhangShasha::ted_complete(f1_r, f2_r));
+                    //
                     td[s1[i]][s2[j]] = std::min(
                         td[s1[i]][s2[j]],
                         td[s1[k]][l] + R + C +  L

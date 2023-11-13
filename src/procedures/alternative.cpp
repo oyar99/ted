@@ -1,4 +1,4 @@
-#include "tree.h"
+#include <alternative.h>
 
 // Función para calcular la distancia de edición entre dos cadenas
 // Aca utilize el algoritmo de Levenshtein para calcular eso rapido con dp en O(n^2)
@@ -41,7 +41,7 @@ std::vector<std::pair<int, int>> match_components(const std::vector<std::vector<
 }
 
 // Funcion principal que calcula la distancia de edicion entre dos arboles
-int ted(const Tree& T, const Tree& T1) {
+int Alternative::ted(const Tree& T, const Tree& T1) {
     std::vector<std::vector<int>> components_T = T.decompose();
     std::vector<std::vector<int>> components_T1 = T1.decompose();
     std::vector<int> representatives_T = T.leftmost(); 

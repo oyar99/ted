@@ -1,9 +1,9 @@
-#ifndef OURALGORITHM_H
-#define OURALGORITHM_H
+#ifndef ALTERNATIVE_H
+#define ALTERNATIVE_H
 
 #include <tree.h>
 
-namespace OurAlgorithm {
+namespace Alternative {
     /**
      * Computes the Tree Edit Distance (TED) between T1 and T2 using our own approximation scheme algorithm 
 

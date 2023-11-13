@@ -2,7 +2,7 @@
 #include <zhangShasha.h>
 #include <saeedScheme.h>
 #include <approxScheme.h>
-#include <ourAlgorithm.h>
+#include <alternative.h>
 #include <iostream>
 
 int compute_ZhangShasha(const Tree& t1, const Tree& t2) {
@@ -18,7 +18,7 @@ int compute_ApproxScheme(const Tree& t1, const Tree&t2) {
 }
 
 int compute_OurAlgorithm(const Tree& t1, const Tree&t2) {
-    return OurAlgorithm::ted(t1, t2);
+    return Alternative::ted(t1, t2);
 } 
 
 std::pair<std::string, std::string> get_input_trees() {
