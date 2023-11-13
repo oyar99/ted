@@ -8,6 +8,9 @@
 /**
  * Represents a node-labeled rooted tree data structure referred to as T.
  * 
+ * It can also represent forests - a set of ordered disjoint trees. The root in that case corresponds to the 
+ * index of the root of the first tree in the set.
+ * 
  * Nodes have a unique id from 1 to n where n is the number of nodes in T.
  * Labels are not necessarily unique and are drawn from the alphabet of all integers.
  * 
@@ -76,6 +79,13 @@ struct Tree {
      * excluding nodes in the exclude set.
     */
     std::string pre_order(int l, int r, const std::unordered_set<int>& exclude) const;
+
+    /**
+     * Returns the size of each subtree rooted at node i
+     * 
+     * @returns A map to get the size of the subtree rooted at any node
+    */
+    std::vector<int> size_subtrees() const;
 
     /**
      * Uses Heavy-light decomposition to return a set of vertex disjoint paths
