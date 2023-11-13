@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
     Tree t1(input_trees.first);
     Tree t2(input_trees.second);
 
-    std::string algorithm(argc <= 1 ? "SaeedOpt" : argv[1]);
+    std::string algorithm(argc <= 1 ? "ZhangShasha" : argv[1]);
 
     int d = -1;
 
@@ -108,6 +108,8 @@ int main(int argc, char *argv[]) {
 
     std::cout << d << std::endl;
 
-    auto duration = duration_cast<microseconds>(stop - start);
-    std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos" << std::endl;
+    if (argc >= 3 && std::string(argv[2]) == "t") {
+        auto duration = duration_cast<microseconds>(stop - start);
+        std::cout << "Execution time: " << duration.count() << " microseconds" << std::endl;
+    }
 }

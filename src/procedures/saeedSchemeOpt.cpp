@@ -148,7 +148,6 @@ void SaeedSchemeOpt::sed(
     // Let us create a forest data structure to quickly return fed for any two proper subforests
     // One of these structures represent the forest on the left hand side of the spine, and the other one
     // the forest on the right hand side.
-    Tree f1_l = get_forest(s1[s1.size() - 1], s1[0], s1, t1);
     Tree f1_r = get_forest(s1[0] + 1, t1.n, s1, t1);
     FEDDS fedds_r = FEDDS(f1_r, t2, td);
 
@@ -166,8 +165,6 @@ void SaeedSchemeOpt::sed(
 
                     Tree f2_l = get_forest(s2[j], l - 1, t2.get_upwards_path(l, s2[j]) /* l does not necessarily belong in s2 */, t2);
 
-                    int z = (f1_l.n - size_st1[s1[k]]) + (d1[s1[k]] - d1[s1[0]] + 1) + (rl1[s1[k]] - s1[0]);
-                    //assert(z >= 0);
                     int cl = ZhangShasha::fed(f1_l, 1, f1_l.n, f2_l, 1, f2_l.n, ZhangShasha::ted_complete(f1_l, f2_l));
                     int cr = fedds_r.query(rl1[s1[k]] - s1[0] + 1, rl1[s1[i]] - s1[0], rl2[l] + 1, rl2[s2[j]]);
 
